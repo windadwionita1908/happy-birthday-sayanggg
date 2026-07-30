@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Sayangku! ❤️</title>
+  <!-- Google Fonts untuk Typo Romantis -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #feada6 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      color: #4a4a4a;
+    }
+
+    /* Layar Pembuka / Surprise Amplop */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      transition: all 0.8s ease-in-out;
+    }
+
+    .envelope {
+      font-size: 80px;
+      margin-bottom: 10px;
+      animation: heartbeat 1.5s infinite;
+      cursor: pointer;
+    }
+
+    #overlay h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    }
+
+    #overlay p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+
+    .open-btn {
+      background: white;
+      color: #ff4757;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      background: #fff0f3;
+    }
+
+    /* Kartu Utama */
+    .card {
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 35px 25px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(233, 30, 99, 0.25);
+      position: relative;
+      z-index: 10;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      display: none;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .title {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4757;
+      font-size: 3.2rem;
+      margin-bottom: 2px;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    /* Frame Foto Polaroid */
+    .polaroid {
+      background: white;
+      padding: 12px 12px 25px 12px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      margin-bottom: 25px;
+      transform: rotate(-1.5deg);
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .media-container {
+      width: 100%;
+      height: 320px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .caption {
+      margin-top: 12px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #ff4757;
+    }
+
+    /* Kotak Pesan Ungkapan Hati */
+    .message-box {
+      font-size: 0.96rem;
+      line-height: 1.8;
+      color: #4a4a4a;
+      background: #fff5f7;
+      padding: 22px 18px;
+      border-radius: 18px;
+      border-left: 4px solid #ff4757;
+      border-right: 4px solid #ff4757;
+      text-align: left;
+      margin-bottom: 25px;
+      min-height: 140px;
+      white-space: pre-line;
+      box-shadow: inset 0 0 10px rgba(255,182,193,0.2);
+    }
+
+    /* Badge Spesial */
+    .special-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff4757, #ff6b81);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+    }
+
+    /* Kontrol Musik */
+    .music-btn {
+      background: #ff4757;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255, 71, 87, 0.35);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-btn:hover {
+      background: #ee5253;
+      transform: translateY(-2px);
+    }
+
+    /* Hati Berterbangan */
+    .heart {
+      position: fixed;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 4s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.15); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Musik Latar (.mp3) -->
+  <audio id="bgMusic" loop>
+    <!-- Ganti 'lagu.mp3' jika nama file musik kamu berbeda -->
+    <source src="lagu.mp3" type="audio/mpeg">
+    Browser tidak mendukung audio.
+  </audio>
+
+  <!-- Layar Pembuka / Amplop Kejutan -->
+  <div id="overlay">
+    <div class="envelope" onclick="openSurprise()">💌</div>
+    <h2>Ada Surat Spesial Buat Kamu...</h2>
+    <p>Dibuka pelan-pelan ya sayang ❤️</p>
+    <button class="open-btn" onclick="openSurprise()">Buka Surat Cinta ✨</button>
+  </div>
+
+  <!-- Kartu Utama -->
+  <div class="card" id="mainCard">
+    <div class="special-badge">✨ Happy Special Day My Favorite Person ✨</div>
+    <h1 class="title">Selamat Ulang Tahun, Sayang! ❤️</h1>
+    <p class="subtitle">Selamanya favoritku</p>
+
+    <!-- Photo Polaroid -->
+    <div class="polaroid">
+      <div class="media-container">
+        <!-- Ganti 'foto.jpg' jika nama file foto kamu berbeda -->
+        <img src="foto.jpg" alt="Foto Pasangan" id="slideshow">
+      </div>
+      <div class="caption">Senyummu, bahagiaku. 🌸</div>
+    </div>
+
+    <!-- Ucapan Romantis Diketik Otomatis -->
+    <div class="message-box" id="typingText"></div>
+
+    <!-- Pemutar Musik -->
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+      🎵 Hentikan Musik
+    </button>
+  </div>
+
+  <script>
+    // Teks Ucapan So Sweet (Bisa diganti atau ditambah sesuai keinginan)
+    const fullText = `Selamat ulang tahun untuk sosok yang selalu membuat hariku lebih bermakna. 💕
+
+Terima kasih ya sudah hadir di hidupku, terima kasih sudah selalu sabar, menemani, dan memberikan rasa nyaman yang luar biasa. Bersamamu selalu terasa seistimewa itu.
+
+Di usiamu yang baru ini, aku berdoa semoga kamu selalu diberikan kesehatan, kelancaran dalam setiap urusanmu, rezeki yang berkah, dan kebahagiaan yang tak pernah putus. 
+
+Semoga semua impian besar yang sedang kamu perjuangkan satu per satu bisa tercapai ya. Apapun yang terjadi, ingat kalau aku akan selalu ada di sini untuk mendukung dan menemani langkahmu.
+
+I love you more than words can say. Tetap jadi favoritku selamanya ya! 🌸✨❤️`;
+
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
+
+    // Fungsi Buka Amplop Kejutan
+    function openSurprise() {
+      document.getElementById("overlay").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("mainCard").style.display = "block";
+        startTyping();
+      }, 700);
+
+      // Play Musik Otomatis
+      music.play().then(() => {
+        isPlaying = true;
+      }).catch(err => {
+        console.log("Autoplay ditahan browser: " + err);
+      });
+    }
+
+    // Efek Pengetikan Teks Otomatis
+    let charIndex = 0;
+    function startTyping() {
+      if (charIndex < fullText.length) {
+        document.getElementById("typingText").innerHTML += fullText.charAt(charIndex);
+        charIndex++;
+        setTimeout(startTyping, 35);
+      }
+    }
+
+    // Kontrol Play/Pause Musik
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.innerHTML = "🎵 Putar Musik";
+      } else {
+        music.play();
+        musicBtn.innerHTML = "⏸️ Hentikan Musik";
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Efek Hati & Bunga Berterbangan
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      const symbols = ["❤️", "💖", "🌸", "💕", "✨", "🌷"];
+      heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+      heart.style.fontSize = Math.random() * 15 + 16 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    setInterval(createHeart, 280);
+  </script>
+</body>
+</html>
